@@ -5,7 +5,7 @@ import plotly.graph_objs as go
 import requests
 from datetime import datetime
 import json
-import pytz # <-- NOVA BIBLIOTECA PARA FUSO HORÁRIO
+import pytz
 
 # --- CONFIGURAÇÃO DO AMBIENTE ---
 IP_ADDRESS = "20.81.162.205"
@@ -22,22 +22,17 @@ TRIGGERS = {
 }
 estado_alerta_anterior = ""
 
-# --- NOVA FUNÇÃO PARA CONVERTER O HORÁRIO ---
 def convert_to_sao_paulo_time(timestamps_utc_str):
-    """Converte uma lista de timestamps em string (formato UTC) para objetos datetime no fuso de São Paulo."""
     utc_zone = pytz.utc
     sp_zone = pytz.timezone('America/Sao_Paulo')
     converted_timestamps = []
     for ts_str in timestamps_utc_str:
-        # Converte a string para datetime UTC
         dt_utc = datetime.fromisoformat(ts_str.replace('Z', '+00:00'))
-        # Converte para o fuso horário de São Paulo
         dt_sp = dt_utc.astimezone(sp_zone)
         converted_timestamps.append(dt_sp)
     return converted_timestamps
 
 def get_data_from_sth(attribute, params):
-    """Função genérica para buscar dados do STH Comet."""
     url = f"http://{IP_ADDRESS}:{PORT_STH}/STH/v1/contextEntities/type/Lamp/id/{DEVICE_ID}/attributes/{attribute}"
     headers = {'fiware-service': 'smart', 'fiware-servicepath': '/'}
     try:
@@ -50,7 +45,6 @@ def get_data_from_sth(attribute, params):
         return []
 
 def enviar_comando_fiware(led_cmd):
-    """Envia um comando para o dispositivo via Orion Context Broker."""
     global estado_alerta_anterior
     if led_cmd != estado_alerta_anterior:
         url_comando = f"http://{IP_ADDRESS}:{PORT_ORION}/v2/entities/{DEVICE_ID}/attrs"
@@ -63,8 +57,11 @@ def enviar_comando_fiware(led_cmd):
         except requests.exceptions.RequestException as e:
             print(f"Erro de conexão ao enviar comando: {e}")
 
-app = dash.Dash(__name__)
+# --- ADICIONA A FOLHA DE ESTILOS EXTERNA ---
+app = dash.Dash(__name__, external_stylesheets=['/assets/custom.css'])
+app.title = "Dashboard da Vinheria"
 
+# --- O LAYOUT VOLTA A TER A COR DE FUNDO DEFINIDA DIRETAMENTE ---
 app.layout = html.Div(style={'backgroundColor': '#111111', 'color': '#DDDDDD', 'fontFamily': 'sans-serif'}, children=[
     html.H1('Dashboard da Vinheria', style={'textAlign': 'center', 'padding': '20px'}),
     html.Div(id='alert-message', style={'textAlign': 'center', 'fontSize': '20px', 'fontWeight': 'bold', 'padding': '10px'}),
@@ -79,7 +76,6 @@ app.layout = html.Div(style={'backgroundColor': '#111111', 'color': '#DDDDDD', '
     Input('interval-component', 'n_intervals')
 )
 def update_dashboard(n):
-    # --- LÓGICA DE ALERTA ---
     temp_data = get_data_from_sth('temperature', {'lastN': 1})
     hum_data = get_data_from_sth('humidity', {'lastN': 1})
     lum_data = get_data_from_sth('luminosity', {'lastN': 1})
@@ -107,18 +103,16 @@ def update_dashboard(n):
         
         enviar_comando_fiware(comando_prioritario)
 
-    # --- FORMATAÇÃO DA MENSAGEM DE ALERTA ---
     final_alert_children = []
     if alert_messages:
         for i, msg in enumerate(alert_messages):
             final_alert_children.append(msg)
             if i < len(alert_messages) - 1:
-                final_alert_children.append(html.Br()) # Adiciona quebra de linha
+                final_alert_children.append(html.Br())
         alert_style['color'] = '#F44336'
     else:
         final_alert_children = "Condições ideais."
 
-    # --- LÓGICA DO GRÁFICO ---
     history_size = 50
     temp_history = get_data_from_sth('temperature', {'lastN': history_size})
     hum_history = get_data_from_sth('humidity', {'lastN': history_size})
@@ -128,7 +122,7 @@ def update_dashboard(n):
         if not history_data: return [], []
         sorted_data = sorted(history_data, key=lambda x: x['recvTime'])
         timestamps_utc = [v['recvTime'] for v in sorted_data]
-        timestamps_sp = convert_to_sao_paulo_time(timestamps_utc) # Converte para SP
+        timestamps_sp = convert_to_sao_paulo_time(timestamps_utc)
         values = [float(v['attrValue']) for v in sorted_data]
         return timestamps_sp, values
 
@@ -144,7 +138,7 @@ def update_dashboard(n):
     
     layout = go.Layout(
         title='Monitoramento em Tempo Real',
-        xaxis_title='Horário (São Paulo)', # Título do eixo atualizado
+        xaxis_title='Horário (São Paulo)',
         yaxis_title='Valores',
         plot_bgcolor='#222222',
         paper_bgcolor='#111111',
