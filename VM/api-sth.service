@@ -5,8 +5,8 @@ After=network.target
 [Service]
 Type=simple
 User=
-WorkingDirectory=/home/rotadeo/cp5-edge-fiware/venv
-ExecStart=/home/rm555310/Edge-Computing-Fiware/venv/bin/python3 /home/rotadeo/cp5-edge-fiware/venv/api-sth.py
+WorkingDirectory=/home/rotadeo/cp5-edge-fiware/VM/Edge-Computing-Fiware/venv
+ExecStart=/home/rotadeo/cp5-edge-fiware/VM/Edge-Computing-Fiware/venv/bin/python3 /home/rotadeo/cp5-edge-fiware/VM/Edge-Computing-Fiware/venv/api-sth.py
 Restart=always
 
 [Install]
