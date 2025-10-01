@@ -1,9 +1,10 @@
 {
 	"info": {
-		"_postman_id": "738a2ede-9b95-4068-a17a-eba28da18ef4",
+		"_postman_id": "95614264-809a-4ef6-b57d-5c3419861ea6",
 		"name": "Fiware-Collection",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "37928598"
+		"_exporter_id": "48009510",
+		"_collection_link": "https://rotadeo-1679396.postman.co/workspace/teste-Cp5-Edge~17325e7b-8818-4f46-abba-80ec5ea385a8/collection/48009510-95614264-809a-4ef6-b57d-5c3419861ea6?action=share&source=collection_link&creator=48009510"
 	},
 	"item": [
 		{
@@ -169,7 +170,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"devices\": [\n    {\n      \"device_id\": \"lampEDGE4\",         // Identificador único do dispositivo\n      \"entity_name\": \"urn:ngsi-ld:Lamp:EDGE4\",   // Nome da entidade para o dispositivo (formato URN)\n      \"entity_type\": \"Lamp\",          // Tipo da entidade (neste caso, \"Lamp\")\n      \"protocol\": \"PDI-IoTA-UltraLight\",  // Protocolo usado para a comunicação (no exemplo, PDI-IoTA-UltraLight)\n      \"transport\": \"MQTT\",            // Método de transporte (neste caso, MQTT)\n\n      // Lista de comandos que o dispositivo pode receber\n      \"commands\": [\n        { \"name\": \"on\", \"type\": \"command\" },  // Comando para ligar\n        { \"name\": \"off\", \"type\": \"command\" }  // Comando para desligar\n      ],\n\n      // Lista de atributos associados ao dispositivo\n      \"attributes\": [\n        { \"object_id\": \"s\", \"name\": \"state\", \"type\": \"Text\" }, // Atributo de estado (Texto)\n        { \"object_id\": \"l\", \"name\": \"luminosity\", \"type\": \"Integer\" },  // Atributo de luminosidade (Inteiro)\n      { \"object_id\": \"t\", \"name\": \"temperature\", \"type\": \"Integer\" },\n    { \"object_id\": \"h\", \"name\": \"humidity\", \"type\": \"Integer\" }     ]\n    }\n  ]\n}\n"
+							"raw": "{\n  \"devices\": [\n    {\n      \"device_id\": \"lampEDGE4\",         // Identificador único do dispositivo\n      \"entity_name\": \"urn:ngsi-ld:Lamp:EDGE4\",   // Nome da entidade para o dispositivo (formato URN)\n      \"entity_type\": \"Lamp\",          // Tipo da entidade (neste caso, \"Lamp\")\n      \"transport\": \"MQTT\",            // Método de transporte (neste caso, MQTT)\n      \"endpoint\": \"mqtt://20.81.162.205:1883\",\n      \"transport_protocol\": \"JSON\",\n\n      // Lista de comandos que o dispositivo pode receber\n      \"commands\": [\n        { \"name\": \"on\", \"type\": \"command\" },  // Comando para ligar\n        { \"name\": \"off\", \"type\": \"command\" },  // Comando para desligar\n        { \"name\": \"led\", \"type\": \"command\" },      \n        { \"name\": \"buzzer\", \"type\": \"command\" }\n      ],\n\n      // Lista de atributos associados ao dispositivo\n      \"attributes\": [\n        { \"object_id\": \"s\", \"name\": \"state\", \"type\": \"Text\" }, // Atributo de estado (Texto)\n        { \"object_id\": \"l\", \"name\": \"luminosity\", \"type\": \"Integer\" },  // Atributo de luminosidade (Inteiro)\n        { \"object_id\": \"t\", \"name\": \"temperature\", \"type\": \"Float\" },\n        { \"object_id\": \"h\", \"name\": \"humidity\", \"type\": \"Float\" }     ]\n    }\n  ]\n}\n"
 						},
 						"url": {
 							"raw": "http://{{url}}:4041/iot/devices",
