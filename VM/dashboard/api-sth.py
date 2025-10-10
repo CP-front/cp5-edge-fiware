@@ -150,4 +150,4 @@ def update_dashboard(n):
     return figure, final_alert_children, alert_style
 
 if __name__ == '__main__':
-    app.run(debug=True, host=DASH_HOST, port=8050)
+    app.run(debug=True, host=DASH_HOST, port=5000)

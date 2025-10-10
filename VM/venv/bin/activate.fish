@@ -33,7 +33,7 @@ end
 # Unset irrelevant variables.
 deactivate nondestructive
 
-set -gx VIRTUAL_ENV /home/rotadeo/cp5-edge-fiware/VM/Edge-Computing-Fiware/venv
+set -gx VIRTUAL_ENV /home/rotadeo/cp5-edge-fiware/VM/venv
 
 set -gx _OLD_VIRTUAL_PATH $PATH
 set -gx PATH "$VIRTUAL_ENV/"bin $PATH
