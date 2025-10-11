@@ -41,7 +41,7 @@ void setup() {
   digitalWrite(LED_PIN, LOW);
   noTone(BUZZER_PIN); // Garante que o buzzer comece desligado
 
-  dhtSensor.setup(DHT_PIN, DHTesp::DHT22);
+  dhtSensor.setup(DHT_PIN, DHTesp::DHT11);
   
   initWiFi();
   initMQTT();
