@@ -265,6 +265,7 @@ Conecte os componentes ao ESP32 de acordo com o seguinte esquema de pinos:
     sudo docker-compose down
     ```
 
+---
 
 ## 6. Operação do Sistema
 - Aceder ao Dashboard: Abra um navegador e vá para `http://<IP_DO_SEU_SERVIDOR>:5000`.
