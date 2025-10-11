@@ -10,6 +10,15 @@ Este projeto aborda essa lacuna, criando um sistema de vigilância ativo que nã
 
 ---
 
+## 📷 Imagem do Protótipo
+![Esquema do Circuito](./img/img-circuitoCP5.png)
+
+
+## 📷 Imagem do Dashboard
+![Dashboard](./img/img-dashCP5.png)
+
+---
+
 # 📌 Descrição da Solução
 A solução implementada é um sistema IoT completo que integra hardware, uma plataforma de backend robusta e uma interface de utilizador web.
 - Um dispositivo ESP32 com sensores lê continuamente os dados do ambiente.
@@ -293,13 +302,13 @@ Conecte os componentes ao ESP32 de acordo com o seguinte esquema de pinos:
 
 ---
 
-## ⌨ Simulação no Wokwi
+# ⌨ Simulação no Wokwi
 
 - [Clique aqui para abrir](https://wokwi.com/projects/443483204612469761)
 
 ---
 
-## 👨‍💻 Autores
+# 👨‍💻 Autores
 
 - Projeto desenvolvido por **Visionary Solutions** para a disciplina Edge Computing - FIAP.
 - Equipe: Arthur Araujo Tenorio; Breno Gonçalves Báo; Rodrigo Cardoso Tadeo; Vinicius Cavalcanti dos Reis
@@ -307,7 +316,7 @@ Conecte os componentes ao ESP32 de acordo com o seguinte esquema de pinos:
 
 ---
 
-## 📢 Licença
+# 📢 Licença
 
 Este projeto é livre para uso educacional. Para uso comercial, consulte os autores.
 
