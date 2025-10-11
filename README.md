@@ -37,7 +37,7 @@ A solução implementada é um sistema IoT completo que integra hardware, uma pl
 
 - Prioridade de Alerta Físico: O alerta físico (LED/Buzzer) reflete a anomalia de maior prioridade (Temperatura > Umidade > Luminosidade).
 
-- Serviço Robusto 24/7: O backend e o dashboard são executados como serviços systemd no Linux, garantindo que o sistema esteja sempre online e se recupere automaticamente de falhas.
+- Serviço Robusto 24/7: O backend e o dashboard são executados como serviços `systemd` no Linux, garantindo que o sistema esteja sempre online e se recupere automaticamente de falhas.
 
 ---
 
@@ -77,7 +77,7 @@ A solução foi projetada em três camadas distintas, cada uma com sua responsab
 
     - Consulta o Orion Context Broker para obter o último valor de cada sensor.
 
-    - Compara os valores com os TRIGGERS definidos.
+    - Compara os valores com os `TRIGGERS` definidos.
 
     - Se uma anomalia for detetada, envia um comando de volta para o Orion Context Broker.
 
